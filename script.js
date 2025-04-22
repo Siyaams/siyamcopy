@@ -1,103 +1,111 @@
-let items = [];
-let currentIndex = 0;
-let totalItems = 0;
-
-// DOM Elements
-const textInput = document.getElementById('text-input');
-const processBtn = document.getElementById('process-btn');
-const copyBtn = document.getElementById('copy-btn');
-const clearBtn = document.getElementById('clear-btn');
-const currentItem = document.getElementById('current-item');
-const totalCount = document.getElementById('total-count');
-const remainingCount = document.getElementById('remaining-count');
-const progressBar = document.getElementById('progress-bar');
-const historyList = document.getElementById('history-list');
-
-// Process Input
-processBtn.addEventListener('click', () => {
-    const inputText = textInput.value.trim();
+// ট্র্যাকার ১ এর জন্য ফাংশনালিটি
+const tracker1 = {
+    items: [],
+    currentIndex: 0,
+    totalItems: 0,
     
-    if (!inputText) {
-        alert('Please enter some text/numbers!');
-        return;
-    }
-    
-    // Reset everything
-    items = inputText.split(/[,/\n]/).filter(item => item.trim() !== '');
-    totalItems = items.length;
-    currentIndex = 0;
-    
-    // Clear history
-    historyList.innerHTML = '';
-    
-    updateUI();
-    
-    // Change button text back to "Get Started"
-    processBtn.textContent = 'Get Started';
-});
-
-// Copy Current Item
-copyBtn.addEventListener('click', () => {
-    if (items.length === 0 || currentIndex >= items.length) {
-        alert('No items to copy!');
-        return;
-    }
-    
-    const itemToCopy = items[currentIndex];
-    
-    // Copy to clipboard
-    navigator.clipboard.writeText(itemToCopy).then(() => {
-        // Add to history
-        const now = new Date();
-        const timeString = now.toLocaleTimeString();
-        const historyItem = document.createElement('li');
-        historyItem.textContent = `${itemToCopy} (Copied at: ${timeString})`;
-        historyList.prepend(historyItem);
+    init: function() {
+        this.textInput = document.getElementById('text-input-1');
+        this.processBtn = document.getElementById('process-btn-1');
+        this.copyBtn = document.getElementById('copy-btn-1');
+        this.clearBtn = document.getElementById('clear-btn-1');
+        this.currentItem = document.getElementById('current-item-1');
+        this.totalCount = document.getElementById('total-count-1');
+        this.remainingCount = document.getElementById('remaining-count-1');
+        this.progressBar = document.getElementById('progress-bar-1');
+        this.historyList = document.getElementById('history-list-1');
         
-        // Move to next item
-        currentIndex++;
-        updateUI();
-    });
-});
+        this.processBtn.addEventListener('click', () => this.processInput());
+        this.copyBtn.addEventListener('click', () => this.copyItem());
+        this.clearBtn.addEventListener('click', () => this.clearAll());
+    },
+    
+    processInput: function() {
+        const inputText = this.textInput.value.trim();
+        if (!inputText) return alert('Please enter some items!');
+        
+        this.items = inputText.split(/[,/\n]/).filter(item => item.trim() !== '');
+        this.totalItems = this.items.length;
+        this.currentIndex = 0;
+        this.historyList.innerHTML = '';
+        this.updateUI();
+    },
+    
+    copyItem: function() {
+        if (this.currentIndex >= this.items.length) return;
+        
+        const item = this.items[this.currentIndex];
+        navigator.clipboard.writeText(item).then(() => {
+            const now = new Date();
+            const historyItem = document.createElement('li');
+            historyItem.textContent = `${item} (Copied at ${now.toLocaleTimeString()})`;
+            this.historyList.prepend(historyItem);
+            
+            this.currentIndex++;
+            this.updateUI();
+        });
+    },
+    
+    clearAll: function() {
+        this.textInput.value = '';
+        this.items = [];
+        this.currentIndex = 0;
+        this.totalItems = 0;
+        this.historyList.innerHTML = '';
+        this.updateUI();
+    },
+    
+    updateUI: function() {
+        this.totalCount.textContent = this.totalItems;
+        this.remainingCount.textContent = this.totalItems - this.currentIndex;
+        
+        if (this.items.length === 0) {
+            this.currentItem.textContent = "Waiting for input...";
+            this.progressBar.style.width = "0%";
+            return;
+        }
+        
+        if (this.currentIndex < this.items.length) {
+            this.currentItem.textContent = this.items[this.currentIndex];
+        } else {
+            this.currentItem.textContent = "All items copied!";
+        }
+        
+        const progress = (this.currentIndex / this.totalItems) * 100;
+        this.progressBar.style.width = `${progress}%`;
+    }
+};
 
-// Clear All
-clearBtn.addEventListener('click', () => {
-    textInput.value = '';
-    items = [];
-    currentIndex = 0;
-    totalItems = 0;
-    historyList.innerHTML = '';
-    updateUI();
-});
+// ট্র্যাকার ২ এর জন্য ফাংশনালিটি (একই কোড, শুধু ID পরিবর্তন)
+const tracker2 = {
+    items: [],
+    currentIndex: 0,
+    totalItems: 0,
+    
+    init: function() {
+        this.textInput = document.getElementById('text-input-2');
+        this.processBtn = document.getElementById('process-btn-2');
+        this.copyBtn = document.getElementById('copy-btn-2');
+        this.clearBtn = document.getElementById('clear-btn-2');
+        this.currentItem = document.getElementById('current-item-2');
+        this.totalCount = document.getElementById('total-count-2');
+        this.remainingCount = document.getElementById('remaining-count-2');
+        this.progressBar = document.getElementById('progress-bar-2');
+        this.historyList = document.getElementById('history-list-2');
+        
+        this.processBtn.addEventListener('click', () => this.processInput());
+        this.copyBtn.addEventListener('click', () => this.copyItem());
+        this.clearBtn.addEventListener('click', () => this.clearAll());
+    },
+    
+    processInput: function() { /* ... tracker1.processInput এর মতোই ... */ },
+    copyItem: function() { /* ... tracker1.copyItem এর মতোই ... */ },
+    clearAll: function() { /* ... tracker1.clearAll এর মতোই ... */ },
+    updateUI: function() { /* ... tracker1.updateUI এর মতোই ... */ }
+};
 
-// Update UI
-function updateUI() {
-    if (items.length === 0) {
-        currentItem.textContent = "Waiting for input...";
-        totalCount.textContent = "0";
-        remainingCount.textContent = "0";
-        progressBar.style.width = "0%";
-        return;
-    }
-    
-    if (currentIndex < items.length) {
-        currentItem.textContent = items[currentIndex];
-    } else {
-        currentItem.textContent = "All items copied!";
-        processBtn.textContent = "Input Again";
-    }
-    
-    totalCount.textContent = totalItems;
-    remainingCount.textContent = totalItems - currentIndex;
-    
-    // Update progress bar
-    const progress = (currentIndex / totalItems) * 100;
-    progressBar.style.width = `${progress}%`;
-    
-    // Change progress bar color when complete
-    if (progress === 100) {
-        progressBar.style.backgroundColor = '#4CAF50';
-    } else {
-        progressBar.style.backgroundColor = '#4a6bff';
-    }
-}
+// পেজ লোড হলে ইনিশিয়ালাইজ
+document.addEventListener('DOMContentLoaded', () => {
+    tracker1.init();
+    tracker2.init();
+});
