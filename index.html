@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Copy Tracker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>📋 Text/Number Copy Tracker</h1>
+        
+        <!-- Progress Section -->
+        <div class="progress-container">
+            <div class="progress-bar" id="progress-bar"></div>
+            <div class="stats">
+                <p><strong>Total:</strong> <span id="total-count">0</span> | <strong>Remaining:</strong> <span id="remaining-count">0</span></p>
+            </div>
+        </div>
+        
+        <!-- Input Section -->
+        <div class="input-section">
+            <textarea id="text-input" placeholder="Enter text/numbers separated by commas, rows or slashes"></textarea>
+            <div class="button-group">
+                <button id="process-btn">Get Started</button>
+                <button id="clear-btn">Clear All</button>
+            </div>
+        </div>
+        
+        <!-- Current Item Section -->
+        <div class="copy-section">
+            <h2>📌 Copy This:</h2>
+            <div class="current-item" id="current-item">Waiting for input...</div>
+            <button id="copy-btn">Copy Now</button>
+        </div>
+        
+        <!-- History Section -->
+        <div class="history">
+            <h2>⏳ History:</h2>
+            <ul id="history-list"></ul>
+        </div>
+        
+        <!-- Footer -->
+        <div class="footer">
+            <p>Made by: Siyam Ahmmed | Telegram: <a href="https://t.me/siyam_ahmmed" target="_blank">@siyam_ahmmed</a></p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
