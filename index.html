@@ -3,47 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Advanced Copy Tracker</title>
+    <title>Dual Copy Tracker</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <h1>📋 Text/Number Copy Tracker</h1>
-        
-        <!-- Progress Section -->
-        <div class="progress-container">
-            <div class="progress-bar" id="progress-bar"></div>
-            <div class="stats">
-                <p><strong>Total:</strong> <span id="total-count">0</span> | <strong>Remaining:</strong> <span id="remaining-count">0</span></p>
+    <div class="main-container">
+        <!-- প্রথম কপি ট্র্যাকার -->
+        <div class="tracker-container">
+            <h2>Copy Tracker 1</h2>
+            <div class="progress-container">
+                <div class="progress-bar" id="progress-bar-1"></div>
+                <div class="stats">
+                    <p>Total: <span id="total-count-1">0</span> | Remaining: <span id="remaining-count-1">0</span></p>
+                </div>
+            </div>
+            
+            <div class="input-section">
+                <textarea id="text-input-1" placeholder="Enter items separated by commas or new lines"></textarea>
+                <div class="button-group">
+                    <button id="process-btn-1">Process</button>
+                    <button id="clear-btn-1">Clear All</button>
+                </div>
+            </div>
+            
+            <div class="copy-section">
+                <h3>Current Item:</h3>
+                <div class="current-item" id="current-item-1">Waiting for input...</div>
+                <button id="copy-btn-1">Copy Item</button>
+            </div>
+            
+            <div class="history">
+                <h3>History:</h3>
+                <ul id="history-list-1"></ul>
             </div>
         </div>
-        
-        <!-- Input Section -->
-        <div class="input-section">
-            <textarea id="text-input" placeholder="Enter text/numbers separated by commas, rows or slashes"></textarea>
-            <div class="button-group">
-                <button id="process-btn">Get Started</button>
-                <button id="clear-btn">Clear All</button>
+
+        <!-- দ্বিতীয় কপি ট্র্যাকার -->
+        <div class="tracker-container">
+            <h2>Copy Tracker 2</h2>
+            <div class="progress-container">
+                <div class="progress-bar" id="progress-bar-2"></div>
+                <div class="stats">
+                    <p>Total: <span id="total-count-2">0</span> | Remaining: <span id="remaining-count-2">0</span></p>
+                </div>
+            </div>
+            
+            <div class="input-section">
+                <textarea id="text-input-2" placeholder="Enter items separated by commas or new lines"></textarea>
+                <div class="button-group">
+                    <button id="process-btn-2">Process</button>
+                    <button id="clear-btn-2">Clear All</button>
+                </div>
+            </div>
+            
+            <div class="copy-section">
+                <h3>Current Item:</h3>
+                <div class="current-item" id="current-item-2">Waiting for input...</div>
+                <button id="copy-btn-2">Copy Item</button>
+            </div>
+            
+            <div class="history">
+                <h3>History:</h3>
+                <ul id="history-list-2"></ul>
             </div>
         </div>
-        
-        <!-- Current Item Section -->
-        <div class="copy-section">
-            <h2>📌 Copy This:</h2>
-            <div class="current-item" id="current-item">Waiting for input...</div>
-            <button id="copy-btn">Copy Now</button>
-        </div>
-        
-        <!-- History Section -->
-        <div class="history">
-            <h2>⏳ History:</h2>
-            <ul id="history-list"></ul>
-        </div>
-        
-        <!-- Footer -->
-        <div class="footer">
-            <p>Made by: Siyam Ahmmed | Telegram: <a href="https://t.me/siyam_ahmmed" target="_blank">@siyam_ahmmed</a></p>
-        </div>
+    </div>
+
+    <div class="footer">
+        <p>Made by: Siyam Ahmmed | Telegram: <a href="https://t.me/siyam_ahmmed" target="_blank">@siyam_ahmmed</a></p>
     </div>
 
     <script src="script.js"></script>
